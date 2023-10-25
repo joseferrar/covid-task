@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useSelector } from 'react-redux';
+import { Routes, Route } from "react-router-dom";
 import './App.css';
+import Country from './pages/Country';
+import { RootState } from './features';
+import AppLayout from './components/Layout/AppLayout';
+import CountryDetails from './pages/CountryDetails';
+import Spinner from './components/Spinner';
 
 function App() {
+  const { loading } = useSelector((state: RootState) => state.loading);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {loading && <Spinner />}
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Country />} />
+          <Route path="/:id" element={<CountryDetails />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
