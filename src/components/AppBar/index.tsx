@@ -11,6 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useAppDispatch } from '../../features';
 import { GetCountryService } from '../../services';
+import { useLocation } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,6 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Header() {
+  const loction = useLocation()
   const dispatch = useAppDispatch()
   const [search, setSearch] = useState<string>('')
 
@@ -102,7 +104,7 @@ function Header() {
           >
             Covid-19
           </Typography>
-          <Search>
+          {loction.pathname === '/' && <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -116,7 +118,8 @@ function Header() {
               <HighlightOffIcon sx={{ color: '#fff' }} />
             </IconButton>}
 
-          </Search>
+          </Search>}
+          
         </Toolbar>
       </AppBar>
     </Box>
