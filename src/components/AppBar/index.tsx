@@ -66,6 +66,7 @@ function Header() {
         dispatch(GetCountryService(event.target.value));
         setSearch(event.target.value);
       }
+      
     };
     document.addEventListener("keydown", listener);
     return () => {
